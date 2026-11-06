@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Irrigation Prediction</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<nav>
+    <h2>🌱 Smart Irrigation</h2>
+
+    <div>
+        <a href="/">Home</a>
+        <a href="/predict">Prediction</a>
+    </div>
+</nav>
+
+<div class="container">
+
+    <div class="card">
+
+        <h2 style="text-align:center;">
+            🌾 Irrigation Prediction
+        </h2>
+
+        <p style="text-align:center;">
+            Enter your farming conditions to predict irrigation requirements.
+        </p>
+
+        <form action="/predict" method="POST">
+
+            <label>Temperature (°C)</label>
+            <input type="number" step="any"
+            name="temperature" placeholder="Enter temperature" required>
+
+            <label>Humidity (%)</label>
+            <input type="number" step="any"
+            name="humidity" placeholder="Enter humidity" required>
+
+            <label>Soil Moisture</label>
+            <input type="number" step="any"
+            name="soil_moisture" placeholder="Enter soil moisture" required>
+
+            <label>Reference Evapotranspiration</label>
+            <input type="number" step="any"
+            name="reference_evapotranspiration"
+            placeholder="Enter reference ET" required>
+
+            <label>Evapotranspiration</label>
+            <input type="number" step="any"
+            name="evapotranspiration"
+            placeholder="Enter evapotranspiration" required>
+
+            <button type="submit" class="btn">
+                Predict Irrigation 🌱
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<footer>
+    <p>Smart Irrigation Prediction System | Academic Project</p>
+</footer>
+
+</body>
+</html>

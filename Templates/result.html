@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Prediction Result</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<nav>
+    <h2>🌱 Smart Irrigation</h2>
+
+    <div>
+        <a href="/">Home</a>
+        <a href="/predict">Prediction</a>
+    </div>
+</nav>
+
+<div class="container">
+
+    <div class="card" style="text-align:center;">
+
+        <h2>🌾 Irrigation Prediction Result</h2>
+
+        <p>Your Machine Learning prediction is:</p>
+
+        <h1 style="color:#176b3a; margin:25px;">
+            {{ result }}
+        </h1>
+
+        <hr>
+
+        <h3 style="margin:20px;">
+            Entered Farming Conditions
+        </h3>
+
+        <p>Temperature: {{ temperature }} °C</p>
+        <p>Humidity: {{ humidity }} %</p>
+        <p>Soil Moisture: {{ soil_moisture }}</p>
+        <p>Reference Evapotranspiration:
+            {{ reference_evapotranspiration }}</p>
+        <p>Evapotranspiration: {{ evapotranspiration }}</p>
+
+        <br>
+
+        <a href="/predict" class="btn">
+            Predict Again
+        </a>
+
+        <a href="/" class="btn">
+            Home
+        </a>
+
+    </div>
+
+</div>
+
+<footer>
+    <p>Smart Irrigation Prediction System | Academic Project</p>
+</footer>
+
+</body>
+</html>

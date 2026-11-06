@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Irrigation Dashboard</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<nav>
+    <h2>🌱 Smart Irrigation</h2>
+    <div>
+        <a href="/">Home</a>
+        <a href="/predict">Prediction</a>
+        <a href="/about">About</a>
+        <a href="/dashboard">Dashboard</a>
+    </div>
+</nav>
+
+<div class="container">
+
+    <div class="hero">
+        <h1>Data Visualization Dashboard</h1>
+        <p>Smart Irrigation Dataset Analysis</p>
+    </div>
+
+    <h2 style="margin-top:30px;">Dataset Overview</h2>
+    <h2 style="margin-top:40px;">📊 Data Visualization</h2>
+
+<div class="card">
+    <h3>Irrigation Requirement Analysis</h3>
+    <canvas id="irrigationChart"></canvas>
+</div>
+
+<div class="card">
+    <h3>Soil Moisture Distribution</h3>
+    <canvas id="moistureChart"></canvas>
+</div>
+<div class="card">
+    <h3>🌡️ Average Temperature Analysis</h3>
+    <canvas id="temperatureChart"></canvas>
+</div>
+
+<div class="card">
+    <h3>💧 Average Humidity Analysis</h3>
+    <canvas id="humidityChart"></canvas>
+</div>
+
+    <div class="card">
+        <h3>Total Dataset Records</h3>
+        <h1>{{ total_records }}</h1>
+    </div>
+
+    <div class="card">
+        <h3>💧 Irrigation Required</h3>
+        <h1>{{ required }}</h1>
+    </div>
+
+    <div class="card">
+        <h3>🌱 Irrigation Not Required</h3>
+        <h1>{{ not_required }}</h1>
+    </div>
+
+    <h2 style="margin-top:30px;">Average Farming Conditions</h2>
+
+    <div class="card">
+        <p>Average Temperature: {{ avg_temperature }} °C</p>
+        <p>Average Humidity: {{ avg_humidity }} %</p>
+        <p>Average Soil Moisture: {{ avg_soil_moisture }}</p>
+    </div>
+
+</div>
+
+<footer>
+    <p>Smart Irrigation Prediction System | Academic Project</p>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+const irrigationChart = new Chart(
+    document.getElementById('irrigationChart'),
+    {
+        type: 'pie',
+
+        data: {
+            labels: [
+                'Irrigation Required',
+                'Irrigation Not Required'
+            ],
+
+            datasets: [{
+                data: [
+                    {{ required }},
+                    {{ not_required }}
+                ],
+
+                backgroundColor: [
+                    '#16a34a',
+                    '#86efac'
+                ]
+            }]
+        },
+
+        options: {
+            responsive: true
+        }
+    }
+);
+
+
+const moistureChart = new Chart(
+    document.getElementById('moistureChart'),
+    {
+        type: 'bar',
+
+        data: {
+            labels: {{ moisture_labels | tojson }},
+
+            datasets: [{
+                label: 'Number of Records',
+                data: {{ moisture_values | tojson }},
+                backgroundColor: '#22c55e'
+            }]
+        },
+        
+
+
+        options: {
+            responsive: true,
+
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    }
+);
+new Chart(document.getElementById('temperatureChart'), {
+    type: 'bar',
+    data: {
+        labels: ['Average Temperature'],
+        datasets: [{
+            label: 'Temperature (°C)',
+            data: [{{ avg_temperature }}],
+            backgroundColor: '#f59e0b'
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            y: { beginAtZero: true }
+        }
+    }
+});
+
+new Chart(document.getElementById('humidityChart'), {
+    type: 'bar',
+    data: {
+        labels: ['Average Humidity'],
+        datasets: [{
+            label: 'Humidity (%)',
+            data: [{{ avg_humidity }}],
+            backgroundColor: '#0ea5e9'
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            y: { beginAtZero: true }
+        }
+    }
+});
+
+
+
+</script>
+</body>
+</html>
+
